@@ -19,7 +19,7 @@ export function TeamFilter({ teams }: { teams: Team[] }) {
             Filter by team
           </h2>
           {isFiltering && (
-            <span className="rounded-full bg-blue-600 px-2 py-0.5 text-xs font-semibold text-white">
+            <span className="rounded-full bg-wc-maroon px-2 py-0.5 text-xs font-semibold text-white">
               {selectedTeamIds.size}
             </span>
           )}
@@ -28,7 +28,7 @@ export function TeamFilter({ teams }: { teams: Team[] }) {
           {isFiltering && (
             <button
               onClick={(e) => { e.stopPropagation(); clearFilter(); }}
-              className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+              className="text-sm font-medium text-wc-maroon hover:underline dark:text-wc-lavender"
             >
               Clear
             </button>
@@ -57,8 +57,8 @@ export function TeamFilter({ teams }: { teams: Team[] }) {
                   onClick={() => toggleTeam(team.id as number)}
                   className={`flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors ${
                     selected
-                      ? "border-blue-600 bg-blue-600 text-white"
-                      : "border-zinc-300 bg-zinc-50 text-zinc-700 hover:border-blue-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                      ? "border-wc-maroon bg-wc-maroon text-white"
+                      : "border-zinc-300 bg-zinc-50 text-zinc-700 hover:border-wc-maroon dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
                   }`}
                 >
                   {team.crest && (

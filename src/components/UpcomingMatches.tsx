@@ -75,7 +75,7 @@ export function UpcomingMatches({ matches, now }: { matches: Match[]; now: strin
           {laterMatches.length > UPCOMING_PAGE_SIZE && (
             <button
               onClick={() => setShowAll((v) => !v)}
-              className="mt-4 text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+              className="mt-4 text-sm font-medium text-wc-maroon hover:underline dark:text-wc-lavender"
             >
               {showAll ? "Show fewer" : `Show ${laterMatches.length - UPCOMING_PAGE_SIZE} more`}
             </button>

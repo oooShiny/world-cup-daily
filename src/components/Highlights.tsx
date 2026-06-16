@@ -50,7 +50,7 @@ export function Highlights({ matches }: { matches: Match[] }) {
                 href={highlightSearchUrl(m)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group rounded-xl border border-zinc-200 bg-white p-4 transition-colors hover:border-blue-400 dark:border-zinc-800 dark:bg-zinc-900"
+                className="group rounded-xl border border-zinc-200 bg-white p-4 transition-colors hover:border-wc-maroon dark:border-zinc-800 dark:bg-zinc-900"
               >
                 <div className="mb-2 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
                   <span>{formatMatchDate(m.utcDate)}</span>
@@ -83,7 +83,7 @@ export function Highlights({ matches }: { matches: Match[] }) {
           {completed.length > HIGHLIGHTS_PAGE_SIZE && (
             <button
               onClick={() => setShowAll((v) => !v)}
-              className="mt-4 text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+              className="mt-4 text-sm font-medium text-wc-maroon hover:underline dark:text-wc-lavender"
             >
               {showAll ? "Show fewer" : `Show ${completed.length - HIGHLIGHTS_PAGE_SIZE} more`}
             </button>

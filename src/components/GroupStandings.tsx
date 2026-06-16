@@ -51,7 +51,7 @@ export function GroupStandings({ standings }: { standings: GroupStanding[] }) {
                   <tr
                     key={row.team.id ?? row.position}
                     className={`border-t border-zinc-100 dark:border-zinc-800 ${
-                      highlighted ? "bg-blue-50 dark:bg-blue-950/40" : ""
+                      highlighted ? "bg-wc-maroon/10 dark:bg-wc-maroon/20" : ""
                     }`}
                   >
                     <td className="py-1 pr-2">

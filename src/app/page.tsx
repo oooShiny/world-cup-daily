@@ -39,8 +39,10 @@ export default async function Home() {
     <TeamFilterProvider>
       <main className="mx-auto w-full max-w-6xl flex-1 space-y-8 px-4 py-8 sm:px-6">
         <header>
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">2026 World Cup Daily</h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <h1 className="text-4xl font-black tracking-tight text-wc-maroon dark:text-wc-lavender">
+            2026 World Cup Daily
+          </h1>
+          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
             Live scores, standings, and highlights for the FIFA World Cup 2026.
           </p>
         </header>
