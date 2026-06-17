@@ -6,7 +6,7 @@ import { useTeamFilter } from "./TeamFilterContext";
 
 export function TeamFilter({ teams }: { teams: Team[] }) {
   const { selectedTeamIds, toggleTeam, clearFilter, isFiltering } = useTeamFilter();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <section className="rounded-xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
@@ -47,7 +47,7 @@ export function TeamFilter({ teams }: { teams: Team[] }) {
 
       {open && (
         <div className="border-t border-zinc-100 px-4 pb-4 pt-3 dark:border-zinc-800">
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
             {teams.map((team) => {
               if (team.id == null) return null;
               const selected = selectedTeamIds.has(team.id);
