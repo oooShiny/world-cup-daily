@@ -47,7 +47,7 @@ export function TeamFilter({ teams }: { teams: Team[] }) {
 
       {open && (
         <div className="border-t border-zinc-100 px-4 pb-4 pt-3 dark:border-zinc-800">
-          <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+          <div className="columns-3 gap-x-1.5 sm:columns-4 md:columns-6 lg:columns-8">
             {teams.map((team) => {
               if (team.id == null) return null;
               const selected = selectedTeamIds.has(team.id);
@@ -55,7 +55,7 @@ export function TeamFilter({ teams }: { teams: Team[] }) {
                 <button
                   key={team.id}
                   onClick={() => toggleTeam(team.id as number)}
-                  className={`flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors ${
+                  className={`mb-1.5 flex w-full break-inside-avoid items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors ${
                     selected
                       ? "border-wc-maroon bg-wc-maroon text-white"
                       : "border-zinc-300 bg-zinc-50 text-zinc-700 hover:border-wc-maroon dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
