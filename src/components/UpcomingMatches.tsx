@@ -39,48 +39,65 @@ export function UpcomingMatches({ matches, now }: { matches: Match[]; now: strin
   );
 
   const visibleLater = showAll ? laterMatches : laterMatches.slice(0, UPCOMING_PAGE_SIZE);
+  const [open, setOpen] = useState(true);
 
   return (
     <section>
-      <h2 className="mb-3 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-        Today&apos;s Matches
-      </h2>
-      {todaysMatches.length === 0 ? (
-        <p className="rounded-xl border border-dashed border-zinc-300 p-4 text-sm text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
-          No matches scheduled for today{isFiltering ? " for the selected teams" : ""}.
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {todaysMatches.map((m) => (
-            <MatchCard key={m.id} match={m} />
-          ))}
-        </div>
-      )}
-
-      {laterMatches.length > 0 && (
-        <div className="mt-6">
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-            Upcoming
-          </h3>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {visibleLater.map((m) => (
-              <div key={m.id} className="relative">
-                <span className="absolute -top-2 left-3 z-10 rounded bg-zinc-900 px-1.5 py-0.5 text-[10px] font-medium text-white dark:bg-zinc-100 dark:text-zinc-900">
-                  {formatMatchDate(m.utcDate)}
-                </span>
-                <MatchCard match={m} />
-              </div>
-            ))}
-          </div>
-          {laterMatches.length > UPCOMING_PAGE_SIZE && (
-            <button
-              onClick={() => setShowAll((v) => !v)}
-              className="mt-4 text-sm font-medium text-wc-maroon hover:underline dark:text-wc-lavender"
-            >
-              {showAll ? "Show fewer" : `Show ${laterMatches.length - UPCOMING_PAGE_SIZE} more`}
-            </button>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="mb-3 flex w-full items-center justify-between text-left"
+        aria-expanded={open}
+      >
+        <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+          Today&apos;s Matches
+        </h2>
+        <span
+          className={`text-zinc-400 transition-transform duration-200 ${open ? "rotate-0" : "-rotate-90"}`}
+          aria-hidden
+        >
+          ▾
+        </span>
+      </button>
+      {open && (
+        <>
+          {todaysMatches.length === 0 ? (
+            <p className="rounded-xl border border-dashed border-zinc-300 p-4 text-sm text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+              No matches scheduled for today{isFiltering ? " for the selected teams" : ""}.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {todaysMatches.map((m) => (
+                <MatchCard key={m.id} match={m} />
+              ))}
+            </div>
           )}
-        </div>
+
+          {laterMatches.length > 0 && (
+            <div className="mt-6">
+              <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                Upcoming
+              </h3>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {visibleLater.map((m) => (
+                  <div key={m.id} className="relative">
+                    <span className="absolute -top-2 left-3 z-10 rounded bg-zinc-900 px-1.5 py-0.5 text-[10px] font-medium text-white dark:bg-zinc-100 dark:text-zinc-900">
+                      {formatMatchDate(m.utcDate)}
+                    </span>
+                    <MatchCard match={m} />
+                  </div>
+                ))}
+              </div>
+              {laterMatches.length > UPCOMING_PAGE_SIZE && (
+                <button
+                  onClick={() => setShowAll((v) => !v)}
+                  className="mt-4 text-sm font-medium text-wc-maroon hover:underline dark:text-wc-lavender"
+                >
+                  {showAll ? "Show fewer" : `Show ${laterMatches.length - UPCOMING_PAGE_SIZE} more`}
+                </button>
+              )}
+            </div>
+          )}
+        </>
       )}
     </section>
   );

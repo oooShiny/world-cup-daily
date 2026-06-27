@@ -63,8 +63,29 @@ export interface GroupStanding {
   table: StandingsRow[];
 }
 
+export interface ScorerEntry {
+  player: {
+    id: number;
+    name: string;
+    nationality: string | null;
+  };
+  team: Team;
+  playedMatches: number;
+  goals: number;
+  assists: number | null;
+  penalties: number | null;
+}
+
+export interface PlaylistClip {
+  videoId: string;
+  title: string;
+  matchDesc: string | null;
+  matchDate: string | null;
+}
+
 export interface TournamentData {
   matches: Match[];
   standings: GroupStanding[];
   groupStageComplete: boolean;
+  scorers: ScorerEntry[];
 }

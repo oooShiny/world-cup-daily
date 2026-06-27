@@ -1,9 +1,11 @@
 import { getTournamentData } from "@/lib/footballData";
+import { fetchPlaylistClips } from "@/lib/youtube";
 import { collectTeams } from "@/lib/teams";
 import { TeamFilterProvider } from "@/components/TeamFilterContext";
 import { TeamFilter } from "@/components/TeamFilter";
 import { UpcomingMatches } from "@/components/UpcomingMatches";
 import { StandingsSection } from "@/components/StandingsSection";
+import { TournamentLeaders } from "@/components/TournamentLeaders";
 import { Highlights } from "@/components/Highlights";
 
 export const revalidate = 60;
@@ -31,9 +33,10 @@ export default async function Home() {
     );
   }
 
-  const { matches, standings, groupStageComplete } = data;
+  const { matches, standings, groupStageComplete, scorers } = data;
   const teams = collectTeams(matches, standings);
   const now = new Date().toISOString();
+  const clips = await fetchPlaylistClips();
 
   return (
     <TeamFilterProvider>
@@ -54,7 +57,8 @@ export default async function Home() {
           matches={matches}
           groupStageComplete={groupStageComplete}
         />
-        <Highlights matches={matches} />
+        <TournamentLeaders scorers={scorers} />
+        <Highlights matches={matches} clips={clips} />
       </main>
     </TeamFilterProvider>
   );

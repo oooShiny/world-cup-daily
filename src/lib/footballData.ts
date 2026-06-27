@@ -1,4 +1,4 @@
-import type { GroupStanding, Match, TournamentData } from "./types";
+import type { GroupStanding, Match, ScorerEntry, TournamentData } from "./types";
 
 const BASE_URL = process.env.FOOTBALL_DATA_API_BASE ?? "https://api.football-data.org/v4";
 const COMPETITION_CODE = process.env.WORLD_CUP_COMPETITION_CODE ?? "WC";
@@ -36,6 +36,13 @@ export async function getMatches(): Promise<Match[]> {
   return data.matches;
 }
 
+export async function getScorers(limit = 20): Promise<ScorerEntry[]> {
+  const data = await footballDataFetch<{ scorers: ScorerEntry[] }>(
+    `/competitions/${COMPETITION_CODE}/scorers?limit=${limit}`
+  );
+  return data.scorers;
+}
+
 export async function getStandings(): Promise<GroupStanding[]> {
   const data = await footballDataFetch<{ standings: GroupStanding[] }>(
     `/competitions/${COMPETITION_CODE}/standings`
@@ -44,12 +51,16 @@ export async function getStandings(): Promise<GroupStanding[]> {
 }
 
 export async function getTournamentData(): Promise<TournamentData> {
-  const [matches, standings] = await Promise.all([getMatches(), getStandings()]);
+  const [matches, standings, scorers] = await Promise.all([
+    getMatches(),
+    getStandings(),
+    getScorers(),
+  ]);
 
   const groupStageMatches = matches.filter((m) => m.stage === "GROUP_STAGE");
   const groupStageComplete =
     groupStageMatches.length > 0 &&
     groupStageMatches.every((m) => m.status === "FINISHED");
 
-  return { matches, standings, groupStageComplete };
+  return { matches, standings, groupStageComplete, scorers };
 }
