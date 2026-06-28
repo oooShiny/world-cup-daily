@@ -58,9 +58,11 @@ export async function getTournamentData(): Promise<TournamentData> {
   ]);
 
   const groupStageMatches = matches.filter((m) => m.stage === "GROUP_STAGE");
+  const hasKnockoutMatches = matches.some((m) => m.stage !== "GROUP_STAGE");
   const groupStageComplete =
-    groupStageMatches.length > 0 &&
-    groupStageMatches.every((m) => m.status === "FINISHED");
+    hasKnockoutMatches ||
+    (groupStageMatches.length > 0 &&
+      groupStageMatches.every((m) => m.status === "FINISHED"));
 
   return { matches, standings, groupStageComplete, scorers };
 }

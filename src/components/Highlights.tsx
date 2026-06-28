@@ -101,10 +101,10 @@ export function Highlights({
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {visible.map((m) => {
                   const matchClips = getClipsForMatch(clips, m);
-                  const watchUrl =
+                  const firstClipUrl =
                     matchClips.length > 0
                       ? `https://www.youtube.com/shorts/${matchClips[0].videoId}`
-                      : highlightSearchUrl(m);
+                      : null;
 
                   return (
                     <div
@@ -113,16 +113,26 @@ export function Highlights({
                     >
                       <div className="mb-2 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
                         <span>{formatMatchDate(m.utcDate)}</span>
-                        <a
-                          href={watchUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-medium text-red-600 hover:underline"
-                        >
-                          {matchClips.length > 0
-                            ? `⚽ ${matchClips.length} clip${matchClips.length !== 1 ? "s" : ""} ▶`
-                            : "Watch highlights ▶"}
-                        </a>
+                        <div className="flex items-center gap-2">
+                          {firstClipUrl && (
+                            <a
+                              href={firstClipUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-medium text-zinc-500 hover:underline dark:text-zinc-400"
+                            >
+                              {`⚽ ${matchClips.length} clip${matchClips.length !== 1 ? "s" : ""} ▶`}
+                            </a>
+                          )}
+                          <a
+                            href={highlightSearchUrl(m)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-red-600 hover:underline"
+                          >
+                            Watch highlights ▶
+                          </a>
+                        </div>
                       </div>
                       <div className="flex items-center justify-center gap-3 text-sm font-semibold text-zinc-900 dark:text-zinc-50">
                         <span className="flex items-center gap-1.5">
